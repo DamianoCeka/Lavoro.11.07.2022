@@ -11,7 +11,9 @@ namespace Lavoro._11._07._2022
             LocalBanck Hype = new LocalBanck();
             
             Hype.OpenAccount(Abreham);
-            
+            string aCCOUNT =   Hype.CheckAccount(Abreham);
+
+            Console.WriteLine(aCCOUNT);
         }
         
     }

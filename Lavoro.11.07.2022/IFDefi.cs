@@ -5,7 +5,7 @@ namespace Lavoro._11._07._2022
 {
     public abstract class IFDefi : IntermediarioFinanziario , Idefi
     {
-        public abstract decimal CheckAccount();
+        public abstract string CheckAccount(Person person);
 
 
         public abstract void CloseAccount();
@@ -13,7 +13,7 @@ namespace Lavoro._11._07._2022
 
         public abstract decimal Deposti();
 
-        public abstract string OpenAccount();
+        public abstract void OpenAccount(Person person);
       
         public abstract decimal TransactCrypto(); // in questo caso dobbiamo far ereditare a dex un contratto da un interfaccia
 
@@ -23,7 +23,7 @@ namespace Lavoro._11._07._2022
     }
     public class DeEx : IFDefi, CreditSevice
     {
-        public override decimal CheckAccount()
+        public override string CheckAccount(Person person)
         {
             throw new NotImplementedException();
         }
@@ -38,7 +38,7 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
 
-        public override string OpenAccount()
+        public override void OpenAccount(Person person)
         {
             throw new NotImplementedException();
         }
@@ -60,7 +60,7 @@ namespace Lavoro._11._07._2022
     }
     public class NoCustoDialWallet : IFDefi
     {
-        public override decimal CheckAccount()
+        public override string CheckAccount(Person person)
         {
             throw new NotImplementedException();
         }
@@ -75,7 +75,7 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
 
-        public override string OpenAccount()
+        public override void OpenAccount(Person person)
         {
             throw new NotImplementedException();
         }

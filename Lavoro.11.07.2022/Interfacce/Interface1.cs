@@ -13,7 +13,7 @@ namespace Lavoro._11._07._2022.Interfacce
         public void CloseAccount();
         public int Withdraw();
         public decimal Deposti();
-        public decimal CheckAccount();
+        public string CheckAccount(Person person);
 
     }
     public interface IFinancialPolicy

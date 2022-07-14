@@ -1,6 +1,7 @@
 ﻿using Lavoro._11._07._2022.Interfacce;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lavoro._11._07._2022
 {
@@ -13,8 +14,13 @@ namespace Lavoro._11._07._2022
             this.clients = new List<Client>();
             
         }
+        protected Client GetClient(Person person)
+        {
+            Client client = this.clients.Where(p => p.Cf == person.Cf).FirstOrDefault();             
+            return client;
+        }
 
-        public abstract decimal CheckAccount();
+        public abstract string CheckAccount(Person person);
         public abstract void CloseAccount();
         public abstract decimal Deposti();
         public abstract string Kyc();
@@ -25,7 +31,7 @@ namespace Lavoro._11._07._2022
     }
     public class Broker : IFCeFi
     {
-        public override decimal CheckAccount()
+        public override string CheckAccount(Person person)
         {
             throw new NotImplementedException();
         }
@@ -67,7 +73,7 @@ namespace Lavoro._11._07._2022
     }
     public class CeEx : IFCeFi, InternationaService
     {
-        public override decimal CheckAccount()
+        public override string CheckAccount(Person person)
         {
             throw new NotImplementedException();
         }
@@ -115,7 +121,7 @@ namespace Lavoro._11._07._2022
     }
     public class CeExCredit : IFCeFi, CreditSevice
     {
-        public override decimal CheckAccount()
+        public override string CheckAccount(Person person)
         {
             throw new NotImplementedException();
         }
@@ -162,7 +168,7 @@ namespace Lavoro._11._07._2022
     }
     public class CeExPrestiti : IFCeFi
     {
-        public override decimal CheckAccount()
+        public override string CheckAccount(Person person)
         {
             throw new NotImplementedException();
         }
@@ -202,46 +208,50 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
     }  
-    public class BancoDeiPegni : ICefi
-    {
-        public decimal CheckAccount()
-        {
-            throw null;
-        }
+    //public class BancoDeiPegni : ICefi
+    //{
+        
 
-        public void CloseAccount()
-        {
-            throw null;
-        }
+    //    public void CloseAccount()
+    //    {
+    //        throw null;
+    //    }
 
-        public decimal Deposti()
-        {
-            throw null;
-        }
+    //    public decimal Deposti()
+    //    {
+    //        throw null;
+    //    }
 
-        public string Kyc()
-        {
-            throw null;
-        }
+    //    public string Kyc()
+    //    {
+    //        throw null;
+    //    }
 
-        public void OpenAccount(Person person)
-        {
-            throw null;
-        }
+       
 
-        public decimal TransactCrypto()
-        {
-            throw null;
-        }
+    //    public decimal TransactCrypto()
+    //    {
+    //        throw null;
+    //    }
 
-        public decimal TransactFiat()
-        {
-            throw null;
-        }
+    //    public decimal TransactFiat()
+    //    {
+    //        throw null;
+    //    }
 
-        public int Withdraw()
-        {
-            throw null;
-        }
-    }
+    //    public int Withdraw()
+    //    {
+    //        throw null;
+    //    }
+
+    //    string CheckAccount(Person person)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+
+    //    string OpenAccount(Person person)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 }

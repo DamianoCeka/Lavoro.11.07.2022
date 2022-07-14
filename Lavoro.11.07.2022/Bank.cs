@@ -1,6 +1,7 @@
 ﻿using Lavoro._11._07._2022.Interfacce;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Lavoro._11._07._2022
 {
@@ -39,11 +40,20 @@ namespace Lavoro._11._07._2022
 
         class BankAccount : Account
         {
-            
+            public BankAccount(string accountNumber) : base(accountNumber)
+            {
+
+            }
         }
-        public override decimal CheckAccount()
+        public override string CheckAccount(Person person)
         {
-            throw new NotImplementedException();
+            Client client = GetClient(person);
+            if (client != null)
+            {
+                return client._accountNumber;
+            }
+
+            return "Nessun conto trovato per questo cliente"; 
         }
 
         public override void CloseAccount()
@@ -64,9 +74,28 @@ namespace Lavoro._11._07._2022
 
         public override void OpenAccount(Person Person)
         {
-            
-            Client Client = new Client(Person.Cf);
-            this.clients.Add(Client);
+            // Cercare se il cliente esiste nella lista dei clienti
+            Client client = GetClient(Person);
+            if(client == null)
+            {
+                client = new Client(Person.Cf); // Creao un nuovo cleinte partendo dalla persona 
+                clients.Add(client); /// metto il nuovo cliente dentro la lista dei clienti della banca.
+            }
+            Random r = new Random();  // Creo un numero random da dare al nuovo  BankAccount
+            int number = r.Next(10000,100000);
+
+            //Creo il nuovo bankAccount, passo il numero random creato al contruttore del BankAccount
+            BankAccount  newAccount = new BankAccount(number.ToString());
+
+            //associo il cliente al nuovo conto che ho creato
+            newAccount._client = client;
+
+            //associo il accountNumber al cliente. 
+            client._accountNumber = newAccount._accountNumber;
+
+            // aggiungo il nuovo conto creato alla lista dei coti della banca
+            this.accounts.Add(newAccount); 
+
 
 
         }
@@ -88,7 +117,7 @@ namespace Lavoro._11._07._2022
     }
     public class InternationalBank : Bank, InternationaService
     {
-        public override decimal CheckAccount()
+        public override string CheckAccount(Person person)
         {
             throw new NotImplementedException();
         }

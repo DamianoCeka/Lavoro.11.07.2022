@@ -4,13 +4,16 @@ namespace Lavoro._11._07._2022
 {
     public abstract class Account 
     {
-        protected string _accountNumber;
+        public string _accountNumber;
         protected List<Product> _products;
+        public Client _client;
 
-        public Account()
+        public Account(string accountNumber)
         {
-          _products = new List<Product>();  
-        }
+            _accountNumber = accountNumber;
+            _products = new List<Product>();  
+        } 
+       
     }
     public class Person
     {
@@ -25,32 +28,12 @@ namespace Lavoro._11._07._2022
     }
     public class Client : Person
     {
+        public string _accountNumber;
         public Client(string cf) : base(cf)
         {
             
         }
     }
    
-    public class BankAccount : Account
-    {
-        public BankAccount(List<Product> products) 
-        {
-
-        }
-    }
-    public class CryptoWallet : Account
-    {
-        public CryptoWallet(List<Product> products)
-        {
-
-        }
-    }
-
-    public class StckAccount : Account
-    {
-        public StckAccount(List<Product> products) 
-        {
-
-        }
-    }
+    
 }
