@@ -1,43 +1,61 @@
-﻿namespace Lavoro._11._07._2022
+﻿using System;
+
+namespace Lavoro._11._07._2022
 {
     public abstract class Product 
     {
-        protected Account Account;
-        protected int id;
-        protected decimal ammount;
+        public Account<Cash> _account;
+        public int _id;
+        public Product(Account<Cash> Account)
+        {
+            _id = new Random().Next(10000, 100000);
+            _account = Account;
+        }
+       
     } // questa
     public class Cash : Product
     {
-        int _id;
-        decimal _amount;
-
-        public enum tickerCash
+        public decimal _amount;
+        TickerCash tickerCash;
+        public Cash(Account<Cash> Account,decimal Amount, TickerCash TickerCash) :base(Account)
         {
-            euro,
-            dollaro,
-            yen,
+            _amount = Amount;
+            tickerCash = TickerCash;
         }
+        public enum TickerCash
+        {
+            EURO,
+            USD,
+            GBP,
+        } 
+       
     }
     public class Cryto : Product
     {
-        int _id;
         decimal _amount;
-        public enum tickerCrypto
+        public Cryto(Account<Cash> Account, decimal Amount, TickerCrypto TickerCrypto) : base(Account)
         {
-            Btc,
-            Eth,
-            Bnb,
+
+        }
+        public enum TickerCrypto
+        {
+            BTC,
+            ETH,
+            BNB,
         }
     }
     public class Stock : Product
     {
-        int _id;
-        decimal _amount;
-        public enum tickerStock
+        int _amount;
+        public Stock(Account<Cash> Account, decimal Amount, TickerStock TickerStock) : base(Account)
         {
-            Tesla,
-            Amazon,
-            CocaCola,
+
+        }
+        public enum TickerStock
+        {
+            TESLA,
+            AMAZON,
+            COCACOLA,
         }
     }
 }

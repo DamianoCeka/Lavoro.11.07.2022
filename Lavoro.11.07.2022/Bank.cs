@@ -35,18 +35,35 @@ namespace Lavoro._11._07._2022
         string _name;
         string _cf;
     }
-    public class LocalBanck : Bank
+    public class LocalBank : Bank
     {
-
-        class BankAccount : Account
+       
+        public LocalBank()
         {
+           
+        }
+        class BankAccount : Account<Cash>
+        {
+            decimal _Saldo; 
+            public decimal Saldo { get { return _Saldo; } set { _Saldo = value; } }     
             public BankAccount(string accountNumber) : base(accountNumber)
             {
-
+                this._products = new List<Cash>(); 
+            } 
+            public void DepositSaldo(decimal amount)
+            {
+                _Saldo += amount; 
+            }
+            public void WithDrawSaldo(decimal amount)
+            {
+                _Saldo -= amount;
             }
         }
-        public override string CheckAccount(Person person)
-        {
+         private string GetAccount(Person person)
+        {  
+
+
+            /// Controllare se il cliente esiste nella lista
             Client client = GetClient(person);
             if (client != null)
             {
@@ -61,16 +78,29 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
 
-        public override decimal Deposti()
+        public override void Deposit(Person person, decimal amount)
         {
-            throw new NotImplementedException();
+            string accountNumber = GetAccount(person);            
+            
+            if (!string.IsNullOrEmpty(accountNumber))
+            {
+                Account<Cash> account = this.accounts.Where(a => a._accountNumber == accountNumber).FirstOrDefault();
+                BankAccount Baccount = (BankAccount) account; 
+                if (Baccount != null)
+                {
+                    Baccount._products.Add(new Cash(Baccount, 1000M, Cash.TickerCash.USD));
+                    Baccount.DepositSaldo(amount);
+                    //Baccount._products.Add(new Cryto(Baccount, 2, Cryto.TickerCrypto.BTC));
+                    //Baccount._products.Add(new Stock(Baccount, 2, Stock.TickerStock.TESLA));
+                }
+            } 
         }
-
+        
         public override string Kyc()
         {
             throw new NotImplementedException();
         }
-
+            
 
         public override void OpenAccount(Person Person)
         {
@@ -110,16 +140,63 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
 
-        public override int Withdraw()
+        public override void Withdraw(Person Person, decimal Amount)
         {
-            throw new NotImplementedException();
+            Client currentClient= GetClient(Person);     
+            if(currentClient == null)  
+                return ;
+            else
+            {
+                Account<Cash> account = GetAccount(currentClient._accountNumber);  
+                if(account!= null)
+                {
+                  
+                   BankAccount baccount = account as BankAccount; // ->> l'errore è gestito del framework 
+                     
+                   if(baccount.Saldo >= Amount) 
+                    {
+                        baccount.WithDrawSaldo(Amount);
+                        Console.WriteLine($"Prelievo di {Amount}  effettuato con successo!");
+
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Vuoi prelevare {Amount} ma hai SOLO {baccount.Saldo} ");
+                        Console.WriteLine("Sei povero!");
+                    }
+
+                   
+                }
+            }
         }
+        public override string CheckAccount(Person person)
+        {   
+            
+            string accountNumber =  GetAccount(person); 
+
+            if(!string.IsNullOrEmpty(accountNumber))
+            {
+                Account<Cash> Baccount = this.accounts.Where(a=> a._accountNumber == accountNumber).FirstOrDefault();  
+
+                if(Baccount!= null)
+                {
+                   //  Restitutuire il saldo del conto Corrente! 
+                }
+            }
+            return string.Empty;
+        }
+
+        private Account<Cash> GetAccount(string AccountNumber)
+        {
+          return  this.accounts.Where((a) =>a._accountNumber == AccountNumber).FirstOrDefault();   
+        }
+
     }
     public class InternationalBank : Bank, InternationaService
     {
         public override string CheckAccount(Person person)
         {
-            throw new NotImplementedException();
+            return string.Empty;
         }
 
         public override void CloseAccount()
@@ -127,7 +204,7 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
 
-        public override decimal Deposti()
+        public override void Deposit(Person person,decimal amount)
         {
             throw new NotImplementedException();
         }
@@ -157,9 +234,9 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
 
-        public override int Withdraw()
+        public override void Withdraw(Person person, decimal amount)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

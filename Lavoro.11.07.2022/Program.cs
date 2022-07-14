@@ -8,13 +8,17 @@ namespace Lavoro._11._07._2022
         static void Main(string[] args)
         {
             Person Abreham = new Person("f23tiqwe");
-            LocalBanck Hype = new LocalBanck();
+            LocalBank Hype = new LocalBank();
             
             Hype.OpenAccount(Abreham);
-            string aCCOUNT =   Hype.CheckAccount(Abreham);
+            Hype.CheckAccount(Abreham);
+            Hype.Deposit(Abreham, 1000M);
+            Hype.Withdraw(Abreham,500M);
+            Hype.Withdraw(Abreham,800M);
 
-            Console.WriteLine(aCCOUNT);
+
+
         }
-        
+
     }
 }

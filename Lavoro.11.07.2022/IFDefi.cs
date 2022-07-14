@@ -10,15 +10,15 @@ namespace Lavoro._11._07._2022
 
         public abstract void CloseAccount();
 
-
-        public abstract decimal Deposti();
+        public abstract void Deposit(Person person, decimal Amount);
+            
 
         public abstract void OpenAccount(Person person);
       
         public abstract decimal TransactCrypto(); // in questo caso dobbiamo far ereditare a dex un contratto da un interfaccia
 
 
-        public abstract int Withdraw();
+        public abstract void Withdraw(Person person, decimal Amounts);
         
     }
     public class DeEx : IFDefi, CreditSevice
@@ -33,7 +33,7 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
 
-        public override decimal Deposti()
+        public override void Deposit(Person person, decimal Amounts)
         {
             throw new NotImplementedException();
         }
@@ -48,7 +48,7 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
 
-        public override int Withdraw()
+        public override void Withdraw(Person person, decimal Amounts)
         {
             throw new NotImplementedException();
         }
@@ -70,7 +70,7 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
 
-        public override decimal Deposti()
+        public override void Deposit(Person person, decimal Amounts)
         {
             throw new NotImplementedException();
         }
@@ -85,7 +85,7 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
 
-        public override int Withdraw()
+        public override void Withdraw(Person person, decimal Amounts)
         {
             throw new NotImplementedException();
         }

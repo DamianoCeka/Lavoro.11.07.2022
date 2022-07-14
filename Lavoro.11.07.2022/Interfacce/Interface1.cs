@@ -11,8 +11,8 @@ namespace Lavoro._11._07._2022.Interfacce
     {
         public void OpenAccount(Person person);
         public void CloseAccount();
-        public int Withdraw();
-        public decimal Deposti();
+        public void Withdraw(Person person, decimal Amount);
+        public void Deposit(Person person, decimal Amount);
         public string CheckAccount(Person person);
 
     }
