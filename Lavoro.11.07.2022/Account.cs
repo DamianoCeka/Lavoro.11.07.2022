@@ -2,39 +2,19 @@
 
 namespace Lavoro._11._07._2022
 {
-    public abstract class Account<T> where T : Product
+    public abstract class Account
     {
         public string _accountNumber;
-        public List<T> _products;        
-        public Client _client;
-      //  public decimal Saldo { get { } }; 
-
+        public List<Product> _products;        
+        public Client _client;  
         public Account(string accountNumber)
         {
             _accountNumber = accountNumber;
-           // _products = new List<T>();  
+            _products = new List<Product>();  
         } 
-       
+        public abstract void GetAccount(Person person);
+        public abstract void GetSaldo(Person person);
+        public abstract void Withdraw(Person person, decimal amount);
+        public abstract void Deposit(Person person, decimal amount);
     }   
-    public class Person
-    {
-        public string Cf;
-
-        public Person(string cf)
-        {
-            Cf = cf;
-        }
-
-
-    }
-    public class Client : Person
-    {
-        public string _accountNumber;
-        public Client(string cf) : base(cf)
-        {
-            
-        }
-    }
-   
-    
 }
