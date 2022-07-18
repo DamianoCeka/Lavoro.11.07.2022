@@ -4,23 +4,22 @@
     {
         public bool TransactFiat { get; }
         public bool TransactCrypto { get; }       
-
     }
 
     public interface ICryptoService : ICeFI
     {
-        public void Withdraw(Person person, decimal Amount, TickerCrypto tickerCrypto);
-        public void Deposit(Person person, decimal Amount, TickerCrypto tickerCrypto);
+        public abstract void Withdraw(Person person, decimal Amount, TickerCrypto tickerCrypto);
+        public abstract void Deposit(Person person, decimal Amount, TickerCrypto tickerCrypto);
     }
     public interface ICashService : ICeFI
     {
-        public void Withdraw(Person person, decimal Amount, TickerCash TickerCash);
-        public void Deposit(Person person, decimal Amount, TickerCash TickerCash);
+        public abstract void Withdraw(Person person, decimal Amount, TickerCash TickerCash);
+        public abstract void Deposit(Person person, decimal Amount, TickerCash TickerCash);
     }
-    public interface IStockService : ICeFI
+    public  interface IStockService : ICeFI
     {
-        public void Withdraw(Person person, decimal Amount, TickerStock TickerStock);
-        public void Deposit(Person person, decimal Amount, TickerStock TickerStock);
+        public abstract void Withdraw(Person person, decimal Amount, TickerStock TickerStock);
+        public abstract void Deposit(Person person, decimal Amount, TickerStock TickerStock);
     }
 
 }

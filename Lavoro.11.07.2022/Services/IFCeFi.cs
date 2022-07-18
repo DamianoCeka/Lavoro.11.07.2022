@@ -28,8 +28,7 @@ namespace Lavoro._11._07._2022
 
         public abstract void OpenAccount(Person person);
         public abstract string CheckAccount(Person person);
-        public abstract void CloseAccount(Person person , int AccountNumber);
-        public abstract void Deposit(Person person, decimal Amount);
+        public abstract void CloseAccount(Person person , int AccountNumber);       
         public abstract string Kyc();
         
     }

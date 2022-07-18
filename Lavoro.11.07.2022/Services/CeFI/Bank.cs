@@ -22,12 +22,12 @@ namespace Lavoro._11._07._2022.Services
             throw new NotImplementedException();
         }
     }
-    public class LocalBank : Bank, IPaymentService
+    public class LocalBank : Bank, ICashService
     {
 
         public LocalBank()
         {
-            
+
         }
         class BankAccount : Account
         {
@@ -63,23 +63,20 @@ namespace Lavoro._11._07._2022.Services
             return "Nessun conto trovato per questo cliente";
         }
 
-        public override void CloseAccount(Person person)
-        {
-            throw new NotImplementedException();
-        }
 
-        public override void Deposit(Person person, decimal amount, TickerCash tickerCash )
+
+        public void Deposit(Person person, decimal amount, TickerCash tickerCash)
         {
             string accountNumber = GetAccount(person);
 
             if (!string.IsNullOrEmpty(accountNumber))
             {
                 Account account = this.accounts.Where(a => a._accountNumber == accountNumber).FirstOrDefault();
-                BankAccount Baccount = (BankAccount) account;
+                BankAccount Baccount = (BankAccount)account;
                 if (Baccount != null)
                 {
                     Baccount._products.Add(new Cash(Baccount, amount, tickerCash));
-                    Baccount.Deposit(person,amount);                    
+                    Baccount.Deposit(person, amount);
                 }
             }
         }
@@ -114,46 +111,20 @@ namespace Lavoro._11._07._2022.Services
             // aggiungo il nuovo conto creato alla lista dei coti della banca
             this.accounts.Add(newAccount);
 
-
-
         }
-
-        public override decimal TransactCrypto()
+        public override void CloseAccount(Person person, int AccountNumber)
         {
-            throw new NotImplementedException();
-        }
-
-        public override decimal TransactFiat()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Withdraw(Person Person, decimal Amount)
-        {
-            Client currentClient = GetClient(Person);
-            if (currentClient == null)
-                return;
-            else
+            Client client = GetClient(person);
+            if(client._accountNumber == client._accountNumber)
             {
-                Account account = GetAccount(currentClient._accountNumber);
-                if (account != null)
-                {
-
-                    BankAccount baccount = account as BankAccount; // ->> l'errore è gestito del framework 
-
-                    if (baccount.Saldo >= Amount)
-                    {
-                        baccount.Withdraw(Person, Amount);
-                        Console.WriteLine($"Prelievo di {Amount}  effettuato con successo!");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Vuoi prelevare {Amount} ma hai SOLO {baccount.Saldo} ");
-                        Console.WriteLine("Sei povero!");
-                    }
-                }
+                client.Cf.Remove(AccountNumber);
             }
+            Console.WriteLine(" il tuo account e stato elimianto! ");
         }
+
+
+
+
         public override string CheckAccount(Person person)
         {
             BankAccount bankAccount = null;
@@ -176,44 +147,66 @@ namespace Lavoro._11._07._2022.Services
             return this.accounts.Where((a) => a._accountNumber == AccountNumber).FirstOrDefault();
         }
 
-    }
-    public class InternationalBank : Bank, IInternationaService
-    {
-        public override string CheckAccount(Person person)
-        {
-            return string.Empty;
-        }
-        public override void CloseAccount()
-        {
-            throw new NotImplementedException();
-        }
-        public override void Deposit(Person person, decimal amount)
-        {
-            throw new NotImplementedException();
-        }
-        public void IWithdraw(Person person, decimal Amount)
-        {
-            Console.WriteLine(" stai prelevando dal estero ");
-        }
-        public override string Kyc()
-        {
-            throw new NotImplementedException();
-        }
-        public override void OpenAccount(Person person)
-        {
-            throw new NotImplementedException();
-        }
-        public override decimal TransactCrypto()
-        {
-            throw new NotImplementedException();
-        }
-        public override decimal TransactFiat()
-        {
-            throw new NotImplementedException();
-        }
-        public override void Withdraw(Person person, decimal amount)
-        {
+        
+        
 
+        public void Withdraw(Person person, decimal Amount, TickerCash TickerCash)
+        {
+            Client currentClient = GetClient(person);
+            if (currentClient == null)
+                return;
+            else
+            {
+                Account account = GetAccount(currentClient._accountNumber);
+                if (account != null)
+                {
+
+                    BankAccount baccount = account as BankAccount; // ->> l'errore è gestito del framework 
+
+                    if (baccount.Saldo >= Amount)
+                    {
+                        baccount.Withdraw(person, Amount);
+                        Console.WriteLine($"Prelievo di {Amount}  effettuato con successo!");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"Vuoi prelevare {Amount} ma hai SOLO {baccount.Saldo} ");
+                        Console.WriteLine("Sei povero!");
+                    }
+                }
+            }
+        }
+        public class InternationalBank : Bank, IInternationaService
+        {
+            public override string CheckAccount(Person person)
+            {
+                return string.Empty;
+            }
+
+            public override void CloseAccount(Person person, int AccountNumber)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Deposit(Person person, decimal Amount, TickerCash TickerCash)
+            {
+                throw new NotImplementedException();
+            }
+
+            public void IWithdraw(Person person, decimal Amount)
+            {
+                Console.WriteLine(" stai prelevando dal estero ");
+            }
+            public override string Kyc()
+            {
+                throw new NotImplementedException();
+            }
+            public override void OpenAccount(Person person)
+            {
+                throw new NotImplementedException();
+            }
+
+            
         }
     }
 }

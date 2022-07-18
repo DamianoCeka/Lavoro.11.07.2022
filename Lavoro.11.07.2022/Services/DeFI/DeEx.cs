@@ -10,7 +10,7 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
 
-        public void CloseAccount(Person person, int AccountNumber)
+        public override void CloseAccount(Person person, int AccountNumber)
         {
             throw new NotImplementedException();
         }
