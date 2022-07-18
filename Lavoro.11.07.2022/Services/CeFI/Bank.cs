@@ -1,4 +1,5 @@
 ﻿using Lavoro._11._07._2022.Interfacce;
+using Lavoro._11._07._2022.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,16 @@ namespace Lavoro._11._07._2022.Services
         {
             throw new NotImplementedException();
         }
+
+        string IPaymentService.EmmitCard()
+        {
+            throw new NotImplementedException();
+        }
+
+        decimal IPaymentService.StorePayments()
+        {
+            throw new NotImplementedException();
+        }
     }
     public class LocalBank : Bank, ICashService
     {
@@ -31,7 +42,7 @@ namespace Lavoro._11._07._2022.Services
         }
         class BankAccount : Account
         {
-            decimal _Saldo;
+            decimal _Saldo;  
             public decimal Saldo { get { return _Saldo; } set { _Saldo = value; } }
             public BankAccount(string accountNumber) : base(accountNumber)
             {
@@ -62,9 +73,6 @@ namespace Lavoro._11._07._2022.Services
 
             return "Nessun conto trovato per questo cliente";
         }
-
-
-
         public void Deposit(Person person, decimal amount, TickerCash tickerCash)
         {
             string accountNumber = GetAccount(person);
@@ -80,13 +88,10 @@ namespace Lavoro._11._07._2022.Services
                 }
             }
         }
-
         public override string Kyc()
         {
             throw new NotImplementedException();
         }
-
-
         public override void OpenAccount(Person Person)
         {
             // Cercare se il cliente esiste nella lista dei clienti
@@ -110,24 +115,32 @@ namespace Lavoro._11._07._2022.Services
 
             // aggiungo il nuovo conto creato alla lista dei coti della banca
             this.accounts.Add(newAccount);
-
+             
         }
         public override void CloseAccount(Person person, int AccountNumber)
         {
             Client client = GetClient(person);
-            if(client._accountNumber == client._accountNumber)
+            if (client != null)
             {
-                client.Cf.Remove(AccountNumber);
+                if (!string.IsNullOrEmpty(client._accountNumber))
+                {
+                    if (client._accountNumber == AccountNumber.ToString())
+                    {
+                        client._accountNumber = string.Empty;
+                        
+                    }
+                    else
+                    {
+                        //// messaggio
+                    }
+                }
+                
             }
+            
             Console.WriteLine(" il tuo account e stato elimianto! ");
         }
-
-
-
-
-        public override string CheckAccount(Person person)
+        public override CheckAccountResponse CheckAccount(Person person)
         {
-            BankAccount bankAccount = null;
             string accountNumber = GetAccount(person);
 
             if (!string.IsNullOrEmpty(accountNumber))
@@ -136,19 +149,20 @@ namespace Lavoro._11._07._2022.Services
 
                 if (Baccount != null)
                 {
-                    //  Restitutuire il saldo del conto Corrente! 
+                    return new CheckAccountResponse()
+                    {
+                        AccountNumber = int.Parse( accountNumber ), // 10 
+                        Saldo = 500000M,
+                        Message = "OK"
+                    };
                 }
             }
-            return string.Empty;
+            return new CheckAccountResponse(){ Message = "Conto non trovato" };
         }
-
         private Account GetAccount(string AccountNumber)
         {
             return this.accounts.Where((a) => a._accountNumber == AccountNumber).FirstOrDefault();
-        }
-
-        
-        
+        }             
 
         public void Withdraw(Person person, decimal Amount, TickerCash TickerCash)
         {
@@ -178,9 +192,10 @@ namespace Lavoro._11._07._2022.Services
         }
         public class InternationalBank : Bank, IInternationaService
         {
-            public override string CheckAccount(Person person)
+            public override CheckAccountResponse CheckAccount(Person person)
             {
-                return string.Empty;
+                throw new NotImplementedException();
+
             }
 
             public override void CloseAccount(Person person, int AccountNumber)
@@ -209,4 +224,6 @@ namespace Lavoro._11._07._2022.Services
             
         }
     }
+
+
 }

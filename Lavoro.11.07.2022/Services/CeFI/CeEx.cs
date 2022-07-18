@@ -21,7 +21,7 @@ namespace Lavoro._11._07._2022
     //        public override void Deposit(Person person, decimal amount) { }
 
     //    }
-    //    public override string CheckAccount(Person person)
+    //    public override CheckAccountResponse CheckAccount(Person person)
     //    {
     //        throw new NotImplementedException();
     //    }

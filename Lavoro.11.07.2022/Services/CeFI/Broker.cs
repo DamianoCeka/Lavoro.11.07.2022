@@ -1,4 +1,5 @@
 ﻿using Lavoro._11._07._2022.Interfacce;
+using Lavoro._11._07._2022.Models;
 using System;
 using System.Collections.Generic;
 
@@ -31,9 +32,10 @@ namespace Lavoro._11._07._2022
 
 
 
-            public override string CheckAccount(Person person)
+            public override CheckAccountResponse CheckAccount(Person person)
             {
-                throw new NotImplementedException();
+
+                return new CheckAccountResponse();  
             }
 
             public override void CloseAccount(Person person, int AccountNumebr)

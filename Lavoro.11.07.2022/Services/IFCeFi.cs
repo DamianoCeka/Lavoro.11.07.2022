@@ -1,4 +1,5 @@
 ﻿using Lavoro._11._07._2022.Interfacce;
+using Lavoro._11._07._2022.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace Lavoro._11._07._2022
         }
 
         public abstract void OpenAccount(Person person);
-        public abstract string CheckAccount(Person person);
+        public abstract CheckAccountResponse CheckAccount(Person person);
         public abstract void CloseAccount(Person person , int AccountNumber);       
         public abstract string Kyc();
         

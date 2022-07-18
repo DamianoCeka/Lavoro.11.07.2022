@@ -12,10 +12,13 @@ namespace Lavoro._11._07._2022
     }
     public class Client : Person
     {
-        public string _accountNumber;
+        public string _accountNumber ; 
         public Client(string cf) : base(cf)
         {
-            
+          
+                      
+
+           
         }
     }
 

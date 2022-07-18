@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Lavoro._11._07._2022.Models;
+using System;
 
 namespace Lavoro._11._07._2022
 {
     public class NoCustoDialWallet : IFDeFI
     {
-        public override string CheckAccount(Person person)
+        public override CheckAccountResponse CheckAccount(Person person)
         {
             throw new NotImplementedException();
         }

@@ -1,13 +1,15 @@
 ﻿using Lavoro._11._07._2022.Interfacce;
+using Lavoro._11._07._2022.Models;
 using System;
 
 namespace Lavoro._11._07._2022
 {
     public class DeEx : IFDeFI, ICreditSevice
     {
-        public override string CheckAccount(Person person)
+        public override CheckAccountResponse CheckAccount(Person person)
         {
             throw new NotImplementedException();
+
         }
 
         public override void CloseAccount(Person person, int AccountNumber)
