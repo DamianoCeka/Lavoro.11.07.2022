@@ -3,12 +3,8 @@
     public interface IFinancialService
     {
         public void OpenAccount(Person person);
-        public void CloseAccount();
-        public void Withdraw(Person person, decimal Amount);
-        public void Deposit(Person person, decimal Amount);
+        public void CloseAccount(Person person, int AccountNumber);
         public string CheckAccount(Person person);
-
     }
-
-
-}
+}   
+    

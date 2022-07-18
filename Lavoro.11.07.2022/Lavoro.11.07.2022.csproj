@@ -6,8 +6,4 @@
     <RootNamespace>Lavoro._11._07._2022</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Enums\" />
-  </ItemGroup>
-
 </Project>

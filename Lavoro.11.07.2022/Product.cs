@@ -12,7 +12,7 @@ namespace Lavoro._11._07._2022
             _account = Account;
         }
     } 
-    public class Cash : Product
+    public partial class Cash : Product
     {
         public decimal _amount;
         TickerCash tickerCash;
@@ -21,15 +21,9 @@ namespace Lavoro._11._07._2022
             _amount = Amount;
             tickerCash = TickerCash;
         }
-        public enum TickerCash
-        {
-            EURO,
-            USD,
-            GBP,
-        } 
        
     }
-    public class Cryto : Product
+    public partial class Cryto : Product
     {
         public decimal _amount;
         TickerCrypto _tickerCash;
@@ -39,14 +33,8 @@ namespace Lavoro._11._07._2022
             _amount = Amount;
             _tickerCash = TickerCrypto; 
         }
-        public enum TickerCrypto
-        {
-            BTC,
-            ETH,
-            BNB,
-        }
     }
-    public class Stock : Product
+    public partial class Stock : Product
     {
         public int _amount;
         TickerStock _tickerStock;
@@ -55,13 +43,6 @@ namespace Lavoro._11._07._2022
         {
             _amount = Amount;
             _tickerStock = TickerStock;
-
-        }
-        public enum TickerStock
-        {
-            TESLA,
-            AMAZON,
-            COCACOLA,
         }
     }
 }

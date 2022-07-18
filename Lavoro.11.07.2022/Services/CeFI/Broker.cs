@@ -1,15 +1,16 @@
-﻿using System;
+﻿using Lavoro._11._07._2022.Interfacce;
+using System;
 
 namespace Lavoro._11._07._2022
 {
-    public class Broker : IFCeFi
+    public class Broker : IFCeFi, IStockService
     {
         public override string CheckAccount(Person person)
         {
             throw new NotImplementedException();
         }
 
-        public override void CloseAccount()
+        public override void CloseAccount(Person person, int AccountNumebr)
         {
             throw new NotImplementedException();
         }
@@ -29,19 +30,11 @@ namespace Lavoro._11._07._2022
             throw new NotImplementedException();
         }
 
-        public override decimal TransactCrypto()
+        public void Withdraw(Person person, decimal Amount, TickerStock tickerStock)        
         {
             throw new NotImplementedException();
         }
-
-        public override decimal TransactFiat()
-        {
-            throw new NotImplementedException();
-        }
-        
-
-        public override void Withdraw(Person person, decimal Amount)
-        
+        public void Deposit(Person person, decimal Amount, TickerStock tickerStock)
         {
             throw new NotImplementedException();
         }

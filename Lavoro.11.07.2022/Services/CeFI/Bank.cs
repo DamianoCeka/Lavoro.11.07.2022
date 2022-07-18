@@ -27,7 +27,7 @@ namespace Lavoro._11._07._2022.Services
 
         public LocalBank()
         {
-
+            
         }
         class BankAccount : Account
         {
@@ -63,12 +63,12 @@ namespace Lavoro._11._07._2022.Services
             return "Nessun conto trovato per questo cliente";
         }
 
-        public override void CloseAccount()
+        public override void CloseAccount(Person person)
         {
             throw new NotImplementedException();
         }
 
-        public override void Deposit(Person person, decimal amount)
+        public override void Deposit(Person person, decimal amount, TickerCash tickerCash )
         {
             string accountNumber = GetAccount(person);
 
@@ -78,10 +78,8 @@ namespace Lavoro._11._07._2022.Services
                 BankAccount Baccount = (BankAccount) account;
                 if (Baccount != null)
                 {
-                    Baccount._products.Add(new Cash(Baccount, 1000M, Cash.TickerCash.USD));
-                    Baccount.Deposit(person,amount);
-                    //Baccount._products.Add(new Cryto(Baccount, 2, Cryto.TickerCrypto.BTC));
-                    //Baccount._products.Add(new Stock(Baccount, 2, Stock.TickerStock.TESLA));
+                    Baccount._products.Add(new Cash(Baccount, amount, tickerCash));
+                    Baccount.Deposit(person,amount);                    
                 }
             }
         }

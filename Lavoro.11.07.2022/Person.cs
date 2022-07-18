@@ -1,4 +1,6 @@
-﻿namespace Lavoro._11._07._2022
+﻿using System.Collections.Generic;
+
+namespace Lavoro._11._07._2022
 {
     public class Person
     {
@@ -13,7 +15,7 @@
         public string _accountNumber;
         public Client(string cf) : base(cf)
         {
-
+            
         }
     }
 
